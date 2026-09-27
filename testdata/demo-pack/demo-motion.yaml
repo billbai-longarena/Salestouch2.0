@@ -1,0 +1,120 @@
+# ⚠️ 这是「数据格式演示」，不是真实业务流程
+#
+# 本文件仅用于说明知识包的数据结构（字段含义、嵌套关系、校验规则）。
+# 全部内容为虚构占位符，与任何真实方法论、行业或客户无关。
+# 真实知识包不在本仓库中，见 ../README.md。
+#
+# 设计说明：
+#   公开 schema 只描述一个通用的「阶段门（stage-gate）」引擎 —— 这是
+#   项目管理领域的公开通用模式（stage-gate / phase-gate），不涉及任何专有语义。
+#   专有的业务语义（各字段在该方法论中的确切含义与判定规则）由私有知识包提供。
+
+key: demo
+version: 0.1.0
+label: "Format Demo · Synthetic Stage-Gate"
+archetype: linear_phases          # linear_phases | state_machine
+license: Apache-2.0              # 演示包；生产包必须为 proprietary 且带签名
+
+# ── 生命周期：并非所有实体都处于"推进中"，需要描述非活跃状态 ──
+lifecycle:
+  idle:
+    label: "Idle"
+    activities:
+      - key: act_idle_1
+        statement: "定期触达（占位）"
+    activateOn: ["trigger.seen"]
+
+# ── 触发条件：什么事件让实体从非活跃进入推进 ──
+triggers:
+  - key: trigger.seen
+    label: "检测到触发事件（占位）"
+    signals:
+      - key: sig_a
+        label: "占位信号 A"
+        extractPrompt: prompts/sig_a.md
+        evidenceTypes: [meeting_note, email]
+
+# ── 阶段模型 ──
+stages:
+  - key: p0
+    label: "Phase 0（占位）"
+    order: 0
+    isTerminal: false
+    metrics:
+      conversionRate: 0.00
+      referenceDays: null
+    gates: []                     # 非活跃阶段不设门
+    activities:
+      - key: act_0
+        statement: "占位动作"
+    exitCriteria:                 # 完成本阶段需满足的条件（需可验证）
+      - key: ec_0
+        statement: "占位条件（可通过记录验证）"
+        verifiable: true
+        evidenceTypes: [meeting_note, email]
+        counterExamples:          # 反例：不可验证的表述一律不合格
+          - "主观印象类表述（占位）"
+
+  - key: p1
+    label: "Phase 1（占位）"
+    order: 1
+    isTerminal: false
+    metrics:
+      conversionRate: 0.10       # 必须由历史数据回填，不得手工设定
+      referenceDays: 60
+    gates:                        # 未满足则阻止推进
+      - key: g_1
+        statement: "占位硬性条件"
+        verifiable: true
+        evidenceTypes: [signed_doc]
+    activities:
+      - key: act_1
+        statement: "占位动作 1"
+      - key: act_2
+        statement: "占位动作 2"
+    exitCriteria:
+      - key: ec_1
+        statement: "占位条件（可通过记录验证）"
+        verifiable: true
+        evidenceTypes: [meeting_note, email]
+        extractPrompt: prompts/ec_1.md
+
+  - key: p2
+    label: "Phase 2（占位）· 终态"
+    order: 2
+    isTerminal: true
+    metrics:
+      conversionRate: 1.00
+      referenceDays: 30
+    gates:
+      - key: g_2
+        statement: "占位收尾条件"
+        verifiable: true
+        evidenceTypes: [signed_doc]
+    activities:
+      - key: act_3
+        statement: "占位收尾动作"
+    exitCriteria:
+      - key: ec_2
+        statement: "占位完成条件"
+        verifiable: true
+        evidenceTypes: [signed_doc]
+
+# ── 指标绑定：指标用于什么目的 ──
+metrics:
+  - key: stage_conversion
+    label: "阶段转化率"
+    source: historical_backfill
+    purpose: [calibration, forecast]
+  - key: stage_dwell_p95
+    label: "阶段停留 P95"
+    source: historical_backfill
+    purpose: [anomaly_alert]
+
+# ── 标定元信息：记录本包如何被标定（可追溯）──
+calibration:
+  method: historical_backfill
+  sampleSize: 0
+  calibratedAt: null
+  calibratedBy: null
+  notes: "演示包未经任何数据标定"

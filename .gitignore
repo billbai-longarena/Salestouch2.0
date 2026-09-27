@@ -1,0 +1,67 @@
+# ═══════════════════════════════════════════════════════════════
+# SaleTouch 2.0 · 公开代码仓库
+#
+# 本仓库只放纯代码。设计文档、调研、业务知识在平级的私有目录中：
+#   ../salestouch2.0DevelopWorkspace/   设计 / 调研 / 笔记
+#   ../salestouch2.0Plugin/             方法论 / 模板 / 校准 / 知识包
+#
+# 以下规则是「防回流」——防止有人把私有内容复制进来。
+# 配合 tools/precommit-guard.sh 使用（路径 + 文件名 + 内容敏感词）。
+# ═══════════════════════════════════════════════════════════════
+
+# ── ① 非代码内容（一律不进本仓库）──
+/docs/
+/design/
+/research/
+/notes/
+/drafts/
+/private/
+/salestouch2.0Plugin/
+/salestouch2.0DevelopWorkspace/
+
+# ── ② 知识资产与制品 ──
+/packs/
+/seedpacks/
+*.pack
+*.pack.sig
+*knowhow-pack*
+*knowledge-pack*
+*.promptpack
+*.evalpack
+*.templatepack
+/calibration/
+/tenant-maps/
+*customer-map*
+*calibration-export*
+*.design.md
+
+# ── ③ 客户数据（任何形态）──
+/customer-data/
+*.recording
+*.transcript
+*.wav
+*.mp3
+/analytics-export/
+*.dump
+*.sql.gz
+
+# ── ④ 凭证 ──
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials*
+
+# ── ⑤ 常规 ──
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.DS_Store
+.idea/
+.vscode/
+tmp/
+.cache/

@@ -1,0 +1,11 @@
+SaleTouch 2.0
+Copyright 2026 SaleTouch
+
+This product includes software developed as part of the SaleTouch project.
+
+Third-party components and their licenses are listed in the SBOM
+generated at build time (see `make sbom`). All bundled dependencies are
+under permissive licenses (Apache-2.0 / MIT / BSD / PostgreSQL).
+
+Note: the engine deliberately excludes components under copyleft licenses
+that would conflict with redistribution (e.g. AGPL/SSPL). See CONTRIBUTING.md.
